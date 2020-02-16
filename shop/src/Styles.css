@@ -1,0 +1,99 @@
+.Products{
+    margin-top: 100px;
+    margin-left:10% ;
+    width:80%;
+    height: 510px;
+    border: 2px solid gray;
+    
+    
+    
+}
+.Productframe{
+    margin-top: 5px;
+    width: 200px;
+    margin-bottom: 5px;
+    display:block;
+    float: left;
+    margin-left: 10px;
+ 
+}
+
+.Productframe_pic{
+    margin:0px 0px;
+    width: 200px;
+    height: 200px;
+    border:1px solid gray;
+}
+.Productframe:hover{
+    background-color: grey;
+}
+.Productframe_Namelink{
+    margin:0px 0px;
+    width: 200px;
+    height: 200px;
+}
+.Buttons{
+    height: 80px;
+    background-color: royalblue;
+    
+}
+.newbutton{
+    
+    font-size: 30px;
+    outline: none;
+    border: none;
+    
+    
+    width: 100%;
+    height: 100%;
+    
+    padding: 10;
+}
+.newbutton:hover{
+    background-color: grey;
+    background-image: none;
+}
+.Button_frame{
+    
+    display: inline-block;
+    margin-top: 20px;
+    width: 30%;
+    border:1px solid black;
+    
+
+}
+.Buttonsbox{
+    margin-left:1000px;
+    
+}
+#logo{
+    display: inline-block;
+    float: left;
+    height: 50px;
+    margin-top:10px;
+    margin-left: 10px;
+}
+
+#name{
+    color:black;
+    float:left;
+    margin-left: 10px;
+}
+#name:hover{
+    color:purple;
+}
+.App{
+    background-image: url(bckg.jpg);
+    height: 1200px;
+
+}
+.Product_text{
+    color:white;
+    overflow: auto;
+}
+.Cart_Button{
+    background-image: url(cart.png);
+    
+    display: inline-block;
+    
+}
