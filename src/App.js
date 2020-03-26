@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import ReactModal from "react-modal";
+
 const player_pool = ["NIKE.png", "G.png", "ceco4.png", "99_1.png"];
 const player_pool_small = [
   "NIKE2.png",
@@ -29,6 +30,7 @@ const ids = [
   "card10",
   "card11"
 ];
+let counter = 0;
 function App() {
   const [effects, set_effects] = useState([]);
   const [stat, set_stat] = useState(false);
@@ -95,12 +97,32 @@ function App() {
     set_draft2(true);
     set_chosen_player(i);
   };
+  let countere = () => {
+    counter++;
+    return counter;
+  };
   const changer = i => {
     set_draft2(false);
     if (player_positions[chosen_player] == "empty card.png") {
       player_positions[chosen_player] = paralel[i];
       set_player_positions(player_positions);
-      console.log(i);
+
+      paralel.splice(i, 1);
+      set_paralel(paralel);
+      small_players.splice(i, 1);
+      set_small_players(small_players);
+    } else {
+      for (let el in paralel_pool) {
+        if (paralel_pool[el] == player_positions[chosen_player]) {
+          console.log(el);
+          set_small_players([...small_players, player_pool_small[el]]);
+          set_paralel([...paralel, paralel_pool[el]]);
+          console.log(small_players);
+        }
+      }
+      player_positions[chosen_player] = paralel[i];
+      set_player_positions(player_positions);
+
       paralel.splice(i, 1);
       set_paralel(paralel);
       small_players.splice(i, 1);
@@ -151,8 +173,8 @@ function App() {
       >
         <button onClick={close_button_two}>close</button>
         <div id="smallpl">
-          {small_players.map((small_players, i) => (
-            <img key={i} src={small_players}></img>
+          {small_players.map((small_playerr, i) => (
+            <img key={countere()} src={small_players}></img>
           ))}
         </div>
       </ReactModal>
@@ -172,7 +194,7 @@ function App() {
         <div id="smallpl">
           {small_players.map((small_player, i) => (
             <img
-              key={small_player}
+              key={countere()}
               src={small_player}
               onClick={() => changer(i)}
             ></img>
@@ -181,7 +203,7 @@ function App() {
       </ReactModal>
       {player_positions.map((player_positions, i) => (
         <img
-          key={player_positions}
+          key={i}
           onClick={() => change(i)}
           src={player_positions}
           id={ids[i]}
