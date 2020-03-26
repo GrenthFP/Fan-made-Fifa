@@ -106,7 +106,7 @@ function App() {
       player_positions[chosen_player].playerData = small_players[i].playerData;
       small_players.splice(i, 1);
     } else {
-      let areaItemBefore = player_positions[chosen_player].playerData;
+      let areaItemBefore = { ...player_positions[chosen_player].playerData };
 
       player_positions[chosen_player].playerData = small_players[i].playerData;
 
