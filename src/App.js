@@ -2,12 +2,18 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import ReactModal from "react-modal";
-const player_pool = ["NIKE.png", "G.png", "ceco4.png"];
-const player_pool_small = ["NIKE2.png", "G3.png", "ceco4_small.png"];
+const player_pool = ["NIKE.png", "G.png", "ceco4.png", "99_1.png"];
+const player_pool_small = [
+  "NIKE2.png",
+  "G3.png",
+  "ceco4_small.png",
+  "99_small.png"
+];
 const paralel_pool = [
   "position_niki.png",
   "position_G.png",
-  "position_ceco.png"
+  "position_ceco.png",
+  "99_player.png"
 ];
 
 const ids = [
@@ -48,21 +54,26 @@ function App() {
   const [chosen_player, set_chosen_player] = useState("");
 
   const handleAfterOpenFunc = () => {
-    let chance = Math.floor(Math.random() * 3);
-    if (chance == 0) {
+    let chance = Math.floor(Math.random() * 100);
+    if (chance < 33) {
       set_player(player_pool[0]);
       set_small_players([...small_players, player_pool_small[0]]);
       set_paralel([...paralel, paralel_pool[0]]);
     }
-    if (chance == 1) {
+    if (chance > 33 && chance < 66) {
       set_player(player_pool[1]);
       set_small_players([...small_players, player_pool_small[1]]);
       set_paralel([...paralel, paralel_pool[1]]);
     }
-    if (chance == 2) {
+    if (chance > 66 && chance < 98) {
       set_player(player_pool[2]);
       set_small_players([...small_players, player_pool_small[2]]);
       set_paralel([...paralel, paralel_pool[2]]);
+    }
+    if (chance >= 98) {
+      set_player(player_pool[3]);
+      set_small_players([...small_players, player_pool_small[3]]);
+      set_paralel([...paralel, paralel_pool[3]]);
     }
     set_stat(true);
     set_effects(["gif1_1.gif", "gif2.gif"]);
