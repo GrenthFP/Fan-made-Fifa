@@ -110,6 +110,9 @@ function App() {
 
   return (
     <div id="lmao">
+      <h2 id="headline">
+        LIMITED TIME:ULTRA RARE PLAYER AVAILABLE! 1% CHANCE FOR 90+!
+      </h2>
       <img id="fieldcss" src="fieldche.png"></img>
       <button id="button1" onClick={handleAfterOpenFunc}>
         Open
