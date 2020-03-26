@@ -1,19 +1,30 @@
-import React, { useState, useEffect } from "react";
 import "./App.css";
 
+import React, { useEffect, useState } from "react";
 import ReactModal from "react-modal";
+
 const player_pool = ["NIKE.png", "G.png", "ceco4.png", "99_1.png"];
 const player_pool_small = [
-  "NIKE2.png",
-  "G3.png",
-  "ceco4_small.png",
-  "99_small.png"
-];
-const paralel_pool = [
-  "position_niki.png",
-  "position_G.png",
-  "position_ceco.png",
-  "99_player.png"
+  {
+    playerName: "niki",
+    image: "NIKE2.png",
+    imagePool: "position_niki.png"
+  },
+  {
+    playerName: "gosho",
+    image: "G3.png",
+    imagePool: "position_G.png"
+  },
+  {
+    playerName: "ceco",
+    image: "ceco4_small.png",
+    imagePool: "position_ceco.png"
+  },
+  {
+    playerName: "99",
+    image: "99_small.png",
+    imagePool: "99_player.png"
+  }
 ];
 
 const ids = [
@@ -29,83 +40,85 @@ const ids = [
   "card10",
   "card11"
 ];
+
+let createItem = () => {
+  return { key: Math.random(), playerData: { imagePool: "empty card.png" } };
+};
+
 function App() {
   const [effects, set_effects] = useState([]);
+  const [isOpenFromField, setIsOpenFromFieldt] = useState(false);
   const [stat, set_stat] = useState(false);
   const [draft, set_draft] = useState(false);
-  const [draft2, set_draft2] = useState(false);
   const [player, set_player] = useState("");
-  const [player_positions, set_player_positions] = useState([
-    "empty card.png",
-    "empty card.png",
-    "empty card.png",
-    "empty card.png",
-    "empty card.png",
-    "empty card.png",
-    "empty card.png",
-    "empty card.png",
-    "empty card.png",
-    "empty card.png",
-    "empty card.png"
-  ]);
+  const [player_positions, set_player_positions] = useState(
+    Array(11)
+      .fill()
+      .map(() => createItem())
+  );
+
   const [small_players, set_small_players] = useState([]);
-  const [paralel, set_paralel] = useState([]);
 
   const [chosen_player, set_chosen_player] = useState("");
 
   const handleAfterOpenFunc = () => {
     let chance = Math.floor(Math.random() * 100);
+
+    let newCharIndex = 0;
+
     if (chance < 33) {
-      set_player(player_pool[0]);
-      set_small_players([...small_players, player_pool_small[0]]);
-      set_paralel([...paralel, paralel_pool[0]]);
+      newCharIndex = 0;
+    } else if (chance > 33 && chance < 66) {
+      newCharIndex = 1;
+    } else if (chance > 66 && chance < 98) {
+      newCharIndex = 2;
+    } else if (chance >= 98) {
+      newCharIndex = 3;
     }
-    if (chance > 33 && chance < 66) {
-      set_player(player_pool[1]);
-      set_small_players([...small_players, player_pool_small[1]]);
-      set_paralel([...paralel, paralel_pool[1]]);
-    }
-    if (chance > 66 && chance < 98) {
-      set_player(player_pool[2]);
-      set_small_players([...small_players, player_pool_small[2]]);
-      set_paralel([...paralel, paralel_pool[2]]);
-    }
-    if (chance >= 98) {
-      set_player(player_pool[3]);
-      set_small_players([...small_players, player_pool_small[3]]);
-      set_paralel([...paralel, paralel_pool[3]]);
-    }
+
+    set_player(player_pool[newCharIndex]);
+
+    set_small_players([
+      ...small_players,
+      { key: Math.random(), playerData: player_pool_small[newCharIndex] }
+    ]);
+
     set_stat(true);
     set_effects(["gif1_1.gif", "gif2.gif"]);
   };
+
   const close_func = () => {
     set_stat(false);
     set_effects([]);
   };
-  const open_button_two = () => {
-    set_draft(true);
-  };
-  const close_button_two = () => {
-    set_draft(false);
-  };
-  const close_button_three = () => {
-    set_draft2(false);
-  };
+
   const change = i => {
-    set_draft2(true);
+    set_draft(true);
+    setIsOpenFromFieldt(true);
     set_chosen_player(i);
   };
   const changer = i => {
-    set_draft2(false);
-    if (player_positions[chosen_player] == "empty card.png") {
-      player_positions[chosen_player] = paralel[i];
-      set_player_positions(player_positions);
-      console.log(i);
-      paralel.splice(i, 1);
-      set_paralel(paralel);
+    set_draft(false);
+
+    if (
+      player_positions[chosen_player].playerData.imagePool == "empty card.png"
+    ) {
+      player_positions[chosen_player].playerData = small_players[i].playerData;
       small_players.splice(i, 1);
-      set_small_players(small_players);
+    } else {
+      let areaItemBefore = player_positions[chosen_player].playerData;
+
+      player_positions[chosen_player].playerData = small_players[i].playerData;
+
+      small_players[i].playerData = areaItemBefore;
     }
+
+    set_small_players(small_players);
+    set_player_positions(player_positions);
+  };
+  const openDraftNoClick = () => {
+    set_draft(true);
+    setIsOpenFromFieldt(false);
   };
 
   return (
@@ -117,10 +130,11 @@ function App() {
       <button id="button1" onClick={handleAfterOpenFunc}>
         Open
       </button>
-      <button id="btn2" onClick={open_button_two}>
+      <button id="btn2" onClick={() => openDraftNoClick()}>
         Club
       </button>
       <ReactModal
+        ariaHideApp={false}
         style={{
           overlay: { backgroundColor: "rgba(150, 200, 120, 0.75)" },
           content: {
@@ -137,7 +151,9 @@ function App() {
         <img className="prop" id="gif2" src={effects[1]}></img>
         <img className="prop" id="gif1" src={effects[0]}></img>
       </ReactModal>
+
       <ReactModal
+        ariaHideApp={false}
         style={{
           overlay: { backgroundColor: "rgba(150, 200, 120, 0.75)" },
           content: {
@@ -149,45 +165,27 @@ function App() {
         isOpen={draft}
         contentLabel={"Example Modal"}
       >
-        <button onClick={close_button_two}>close</button>
-        <div id="smallpl">
-          {small_players.map((small_players, i) => (
-            <img key={i} src={small_players}></img>
-          ))}
-        </div>
-      </ReactModal>
-      <ReactModal
-        style={{
-          overlay: { backgroundColor: "rgba(150, 200, 120, 0.75)" },
-          content: {
-            backgroundColor: "hsl(172, 100%, 48%)",
-            width: "450px",
-            height: "550px"
-          }
-        }}
-        isOpen={draft2}
-        contentLabel={"Example Modal"}
-      >
-        <button onClick={close_button_three}>close</button>
-        <div id="smallpl">
+        <button onClick={() => set_draft(false)}>close</button>
+        <div id="smallpl2">
           {small_players.map((small_player, i) => (
             <img
-              key={small_player}
-              src={small_player}
-              onClick={() => changer(i)}
+              key={small_player.key}
+              src={small_player.playerData.image}
+              onClick={!isOpenFromField ? null : () => changer(i)}
             ></img>
           ))}
         </div>
       </ReactModal>
+
       {player_positions.map((player_positions, i) => (
         <img
-          key={player_positions}
+          key={player_positions.key}
           onClick={() => change(i)}
-          src={player_positions}
+          src={player_positions.playerData.imagePool}
           id={ids[i]}
         ></img>
       ))}
-      <div class="clearer"></div>
+      <div className="clearer"></div>
     </div>
   );
 }
