@@ -40,7 +40,7 @@ body {
   height: 50px;
   width: 100px;
   font-size: 32px;
-  top: 50px;
+  top: 100px;
   left: 50px;
   position: absolute;
 }
@@ -48,7 +48,7 @@ body {
   clear: both;
 }
 #btn2 {
-  height: 50px;
+  height: 100px;
   width: 100px;
   font-size: 32px;
   top: 50px;
