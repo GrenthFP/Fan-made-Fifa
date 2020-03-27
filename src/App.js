@@ -3,7 +3,7 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import ReactModal from "react-modal";
 
-const player_pool = ["NIKE.png", "G.png", "ceco4.png", "99_1.png"];
+const player_pool = ["NIKE.png", "G.png", "ceco4.png", "99_1.png", "az4.png"];
 const player_pool_small = [
   {
     playerName: "niki",
@@ -24,6 +24,11 @@ const player_pool_small = [
     playerName: "99",
     image: "99_small.png",
     imagePool: "99_player.png"
+  },
+  {
+    playerName: "Az",
+    image: "az4_small.png",
+    imagePool: "az_player.png"
   }
 ];
 
@@ -66,14 +71,16 @@ function App() {
 
     let newCharIndex = 0;
 
-    if (chance < 33) {
+    if (chance < 25) {
       newCharIndex = 0;
-    } else if (chance > 33 && chance < 66) {
+    } else if (chance > 25 && chance < 50) {
       newCharIndex = 1;
-    } else if (chance > 66 && chance < 98) {
+    } else if (chance > 50 && chance < 75) {
       newCharIndex = 2;
     } else if (chance >= 98) {
       newCharIndex = 3;
+    } else if (chance > 75 && chance < 98) {
+      newCharIndex = 4;
     }
 
     set_player(player_pool[newCharIndex]);
