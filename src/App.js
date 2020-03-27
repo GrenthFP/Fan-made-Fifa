@@ -9,7 +9,8 @@ const player_pool = [
   "ceco4.png",
   "99_1.png",
   "az4.png",
-  "mitko_alt.png"
+  "mitko_alt.png",
+  "vaskoiconcard1.png"
 ];
 const player_pool_small = [
   {
@@ -41,6 +42,11 @@ const player_pool_small = [
     playerName: "Mitko",
     image: "mitko_alt_small.png",
     imagePool: "mitko_player.png"
+  },
+  {
+    playerName: "Vasko Icon",
+    image: "vaskoiconcard1_small.png",
+    imagePool: "vaskoicon_player.png"
   }
 ];
 
@@ -82,19 +88,21 @@ function App() {
     let chance = Math.floor(Math.random() * 100);
 
     let newCharIndex = 0;
-
+    console.log(chance);
     if (chance < 20) {
       newCharIndex = 0;
     } else if (chance > 20 && chance < 40) {
       newCharIndex = 1;
     } else if (chance > 40 && chance < 60) {
       newCharIndex = 2;
-    } else if (chance >= 98) {
+    } else if (chance == 98) {
       newCharIndex = 3;
     } else if (chance > 60 && chance < 80) {
       newCharIndex = 4;
     } else if (chance > 80 && chance < 98) {
       newCharIndex = 5;
+    } else if (chance == 99) {
+      newCharIndex = 6;
     }
 
     set_player(player_pool[newCharIndex]);
