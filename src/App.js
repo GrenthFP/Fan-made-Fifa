@@ -12,7 +12,9 @@ const player_pool = [
   "mitko_alt.png",
   "vaskoiconcard1.png",
   "nasiu3.png",
-  "vasko4.png"
+  "vasko4.png",
+  "cecore3.png",
+  "vanio3.png"
 ];
 const player_pool_small = [
   {
@@ -59,6 +61,16 @@ const player_pool_small = [
     playerName: "Vasko",
     image: "vasko4_small.png",
     imagePool: "vasko_player.png"
+  },
+  {
+    playerName: "Ceco_re",
+    image: "cecore3_small.png",
+    imagePool: "cecore_player.png"
+  },
+  {
+    playerName: "Vanio_re",
+    image: "vanio3_small.png",
+    imagePool: "vanio_position.png"
   }
 ];
 
@@ -97,28 +109,43 @@ function App() {
   const [chosen_player, set_chosen_player] = useState("");
 
   const handleAfterOpenFunc = () => {
-    let chance = Math.floor(Math.random() * 100);
+    let chance = Math.floor(Math.random() * 81);
 
     let newCharIndex = 0;
     console.log(chance);
-    if (chance > 43 && chance < 54) {
+    if (chance > 47 && chance <= 57) {
       newCharIndex = 0;
-    } else if (chance > 54 && chance < 65) {
+      //Rare silver
+    } else if (chance > 37 && chance <= 47) {
       newCharIndex = 1;
-    } else if (chance > 65 && chance < 76) {
+      //Rare silver
+    } else if (chance > 27 && chance <= 37) {
       newCharIndex = 2;
-    } else if (chance == 98) {
+      //Rare silver
+    } else if (chance == 2) {
       newCharIndex = 3;
-    } else if (chance > 76 && chance < 87) {
+      //TOTY
+    } else if (chance > 12 && chance <= 17) {
       newCharIndex = 4;
-    } else if (chance > 87 && chance < 98) {
+      //inform silver
+    } else if (chance > 7 && chance <= 12) {
       newCharIndex = 5;
-    } else if (chance == 99) {
+      //inform silver
+    } else if (chance == 1 || chance == 0) {
       newCharIndex = 6;
-    } else if (chance < 32) {
+      //ICON
+    } else if (chance > 57 && chance <= 77) {
       newCharIndex = 7;
-    } else if (chance > 32 && chance < 43) {
+      //silver
+    } else if (chance > 17 && chance <= 27) {
       newCharIndex = 8;
+      //silver rare
+    } else if (chance > 2 && chance <= 7) {
+      newCharIndex = 9;
+      //inform silver
+    } else if (chance > 77 && chance <= 80) {
+      newCharIndex = 10;
+      //inform gold
     }
 
     set_player(player_pool[newCharIndex]);
