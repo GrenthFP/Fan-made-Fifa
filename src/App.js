@@ -15,7 +15,11 @@ const player_pool = [
   "vasko4.png",
   "cecore3.png",
   "vanio3.png",
-  "mitkot5.png"
+  "mitkot5.png",
+  "AivanCARD.png",
+  "Ivan_Stefanov.png",
+  "Pesho_Yadkov.png",
+  "pesho2.png"
 ];
 const player_pool_small = [
   {
@@ -77,6 +81,26 @@ const player_pool_small = [
     playerName: "Mitko T",
     image: "mitkot5_small.png",
     imagePool: "mitkot_player.png"
+  },
+  {
+    playerName: "Aivan",
+    image: "AivanCARD_small.png",
+    imagePool: "aivan_position.png"
+  },
+  {
+    playerName: "Ivan st",
+    image: "Ivan_Stefanov_small.png",
+    imagePool: "vankataa_position.png"
+  },
+  {
+    playerName: "Pesho",
+    image: "Pesho_Yadkov_small.png",
+    imagePool: "pshoo_position.png"
+  },
+  {
+    playerName: "Pesho2",
+    image: "pesho2_small.png",
+    imagePool: "pesho2_player.png"
   }
 ];
 
@@ -115,7 +139,7 @@ function App() {
   const [chosen_player, set_chosen_player] = useState("");
 
   const handleAfterOpenFunc = () => {
-    let chance = Math.floor(Math.random() * 83);
+    let chance = Math.floor(Math.random() * 110);
 
     let newCharIndex = 0;
     console.log(chance);
@@ -140,7 +164,7 @@ function App() {
     } else if (chance == 1 || chance == 0) {
       newCharIndex = 6;
       //ICON
-    } else if (chance > 57 && chance <= 77) {
+    } else if (chance > 57 && chance <= 70) {
       newCharIndex = 7;
       //silver
     } else if (chance > 17 && chance <= 27) {
@@ -155,6 +179,18 @@ function App() {
     } else if (chance > 80 && chance <= 82) {
       newCharIndex = 11;
       //Champs silver
+    } else if (chance > 82 && chance <= 92) {
+      newCharIndex = 12;
+      //silver rare
+    } else if (chance > 92 && chance <= 99) {
+      newCharIndex = 13;
+      //gold
+    } else if (chance > 99 && chance <= 109) {
+      newCharIndex = 14;
+      //silver rare
+    } else if (chance > 70 && chance <= 77) {
+      newCharIndex = 15;
+      //gold
     }
 
     set_player(player_pool[newCharIndex]);
