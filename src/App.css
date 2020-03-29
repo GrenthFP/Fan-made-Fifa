@@ -21,6 +21,9 @@ body {
   overflow: hidden;
 }
 
+#jeko2 {
+  opacity: 1;
+}
 #jeko1 {
   animation: fadein 1500ms;
 }

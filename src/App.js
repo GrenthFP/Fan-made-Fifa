@@ -23,81 +23,98 @@ const player_pool = [
 ];
 const player_pool_small = [
   {
+    big: "NIKE.png",
     playerName: "niki",
     image: "NIKE2.png",
     imagePool: "position_niki.png"
   },
   {
+    big: "G.png",
     playerName: "gosho",
     image: "G3.png",
     imagePool: "position_G.png"
   },
   {
+    big: "ceco4.png",
+    big: "NIKE.png",
     playerName: "ceco",
     image: "ceco4_small.png",
     imagePool: "position_ceco.png"
   },
   {
+    big: "99_1.png",
     playerName: "99",
     image: "99_small.png",
     imagePool: "99_player.png"
   },
   {
+    big: "az4.png",
     playerName: "Az",
     image: "az4_small.png",
     imagePool: "az_player.png"
   },
   {
+    big: "mitko_alt.png",
     playerName: "Mitko",
     image: "mitko_alt_small.png",
     imagePool: "mitko_player.png"
   },
   {
+    big: "vaskoiconcard1.png",
     playerName: "Vasko Icon",
     image: "vaskoiconcard1_small.png",
     imagePool: "vaskoicon_player.png"
   },
   {
+    big: "nasiu3.png",
     playerName: "Nasiu",
     image: "nasiu3_small.png",
     imagePool: "nasiu_player.png"
   },
   {
+    big: "vasko4.png",
     playerName: "Vasko",
     image: "vasko4_small.png",
     imagePool: "vasko_player.png"
   },
   {
+    big: "cecore3.png",
     playerName: "Ceco_re",
     image: "cecore3_small.png",
     imagePool: "cecore_player.png"
   },
   {
+    big: "vanio3.png",
     playerName: "Vanio_re",
     image: "vanio3_small.png",
     imagePool: "vanio_position.png"
   },
   {
+    big: "mitkot5.png",
     playerName: "Mitko T",
     image: "mitkot5_small.png",
     imagePool: "mitkot_player.png"
   },
   {
+    big: "AivanCARD.png",
     playerName: "Aivan",
     image: "AivanCARD_small.png",
     imagePool: "aivan_position.png"
   },
   {
+    big: "Ivan_Stefanov.png",
     playerName: "Ivan st",
     image: "Ivan_Stefanov_small.png",
     imagePool: "vankataa_position.png"
   },
   {
+    big: "Pesho_Yadkov.png",
     playerName: "Pesho",
     image: "Pesho_Yadkov_small.png",
     imagePool: "pshoo_position.png"
   },
   {
+    big: "pesho2.png",
     playerName: "Pesho2",
     image: "pesho2_small.png",
     imagePool: "pesho2_player.png"
@@ -123,11 +140,13 @@ let createItem = () => {
 };
 
 function App() {
+  const [bigid, set_bigid] = useState("jeko1");
   const [effects, set_effects] = useState([]);
   const [isOpenFromField, setIsOpenFromFieldt] = useState(false);
   const [stat, set_stat] = useState(false);
   const [draft, set_draft] = useState(false);
   const [player, set_player] = useState("");
+
   const [player_positions, set_player_positions] = useState(
     Array(11)
       .fill()
@@ -207,6 +226,7 @@ function App() {
   const close_func = () => {
     set_stat(false);
     set_effects([]);
+    set_bigid("jeko1");
   };
 
   const change = i => {
@@ -216,7 +236,7 @@ function App() {
   };
   const changer = i => {
     set_draft(false);
-
+    console.log(i);
     if (
       player_positions[chosen_player].playerData.imagePool == "empty card.png"
     ) {
@@ -236,6 +256,16 @@ function App() {
   const openDraftNoClick = () => {
     set_draft(true);
     setIsOpenFromFieldt(false);
+  };
+  const review = src => {
+    set_effects([]);
+    console.log(effects);
+    set_bigid("jeko2");
+    set_draft(false);
+    console.log(src);
+    console.log(src.playerData.big);
+    set_player(src.playerData.big);
+    set_stat(true);
   };
 
   return (
@@ -265,9 +295,10 @@ function App() {
         contentLabel={"Example Modal"}
       >
         <button onClick={close_func}>close</button>
-        <img className="prop" id="jeko1" src={player}></img>
-        <img className="prop" id="gif2" src={effects[1]}></img>
-        <img className="prop" id="gif1" src={effects[0]}></img>
+        <img className="prop" id={bigid} src={player}></img>
+
+        <img className="prop" id="gif1" src={effects[1]}></img>
+        <img className="prop" id="gif2" src={effects[0]}></img>
       </ReactModal>
 
       <ReactModal
@@ -289,7 +320,9 @@ function App() {
             <img
               key={small_player.key}
               src={small_player.playerData.image}
-              onClick={!isOpenFromField ? null : () => changer(i)}
+              onClick={
+                !isOpenFromField ? () => review(small_player) : () => changer(i)
+              }
             ></img>
           ))}
         </div>
