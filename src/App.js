@@ -140,6 +140,7 @@ let createItem = () => {
 };
 let effectsArr = ["gif1_1.gif", "gif2.gif"];
 function App() {
+  const [toggle, set_toggle] = useState(false);
   const [bigid, set_bigid] = useState("jeko1");
   const [effects, set_effects] = useState([]);
   const [isOpenFromField, setIsOpenFromFieldt] = useState(false);
@@ -230,6 +231,10 @@ function App() {
 
     set_effects([]);
     set_bigid("jeko1");
+    if (toggle == true) {
+      set_draft(true);
+    }
+    set_toggle(false);
   };
 
   const change = i => {
@@ -269,6 +274,7 @@ function App() {
     console.log(src.playerData.big);
     set_player(src.playerData.big);
     set_stat(true);
+    set_toggle(true);
   };
 
   return (
