@@ -14,7 +14,8 @@ const player_pool = [
   "nasiu3.png",
   "vasko4.png",
   "cecore3.png",
-  "vanio3.png"
+  "vanio3.png",
+  "mitkot5.png"
 ];
 const player_pool_small = [
   {
@@ -71,6 +72,11 @@ const player_pool_small = [
     playerName: "Vanio_re",
     image: "vanio3_small.png",
     imagePool: "vanio_position.png"
+  },
+  {
+    playerName: "Mitko T",
+    image: "mitkot5_small.png",
+    imagePool: "mitkot_player.png"
   }
 ];
 
@@ -109,7 +115,7 @@ function App() {
   const [chosen_player, set_chosen_player] = useState("");
 
   const handleAfterOpenFunc = () => {
-    let chance = Math.floor(Math.random() * 81);
+    let chance = Math.floor(Math.random() * 83);
 
     let newCharIndex = 0;
     console.log(chance);
@@ -146,6 +152,9 @@ function App() {
     } else if (chance > 77 && chance <= 80) {
       newCharIndex = 10;
       //inform gold
+    } else if (chance > 80 && chance <= 82) {
+      newCharIndex = 11;
+      //Champs silver
     }
 
     set_player(player_pool[newCharIndex]);
