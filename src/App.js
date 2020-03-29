@@ -138,11 +138,12 @@ const ids = [
 let createItem = () => {
   return { key: Math.random(), playerData: { imagePool: "empty card.png" } };
 };
-
+let effectsArr = ["gif1_1.gif", "gif2.gif"];
 function App() {
   const [bigid, set_bigid] = useState("jeko1");
   const [effects, set_effects] = useState([]);
   const [isOpenFromField, setIsOpenFromFieldt] = useState(false);
+  const [showEffects, setShowEffects] = useState(false);
   const [stat, set_stat] = useState(false);
   const [draft, set_draft] = useState(false);
   const [player, set_player] = useState("");
@@ -158,6 +159,9 @@ function App() {
   const [chosen_player, set_chosen_player] = useState("");
 
   const handleAfterOpenFunc = () => {
+    setShowEffects(true);
+    let effectsCopy = [...effectsArr];
+    set_effects(effectsCopy);
     let chance = Math.floor(Math.random() * 110);
 
     let newCharIndex = 0;
@@ -220,11 +224,11 @@ function App() {
     ]);
 
     set_stat(true);
-    set_effects(["gif1_1.gif", "gif2.gif"]);
   };
 
   const close_func = () => {
     set_stat(false);
+    setShowEffects(false);
     set_effects([]);
     set_bigid("jeko1");
   };
@@ -296,12 +300,19 @@ function App() {
       >
         <button onClick={close_func}>close</button>
         <img className="prop" id={bigid} src={player}></img>
-        {!!effects[1] && (
-          <img className="prop" id="gif1" src={effects[1]}></img>
-        )}
-        {!!effects[0] && (
-          <img className="prop" id="gif2" src={effects[0]}></img>
-        )}
+
+        <img
+          style={{ display: !!effects[1] ? "" : "none" }}
+          className="prop"
+          id="gif1"
+          src={effects[1]}
+        ></img>
+        <img
+          style={{ display: !!effects[0] ? "" : "none" }}
+          className="prop"
+          id="gif2"
+          src={effects[0]}
+        ></img>
       </ReactModal>
 
       <ReactModal
