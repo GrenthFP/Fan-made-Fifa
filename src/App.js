@@ -143,7 +143,7 @@ function App() {
   const [bigid, set_bigid] = useState("jeko1");
   const [effects, set_effects] = useState([]);
   const [isOpenFromField, setIsOpenFromFieldt] = useState(false);
-  const [showEffects, setShowEffects] = useState(false);
+
   const [stat, set_stat] = useState(false);
   const [draft, set_draft] = useState(false);
   const [player, set_player] = useState("");
@@ -159,7 +159,6 @@ function App() {
   const [chosen_player, set_chosen_player] = useState("");
 
   const handleAfterOpenFunc = () => {
-    setShowEffects(true);
     let effectsCopy = [...effectsArr];
     set_effects(effectsCopy);
     let chance = Math.floor(Math.random() * 110);
@@ -228,7 +227,7 @@ function App() {
 
   const close_func = () => {
     set_stat(false);
-    setShowEffects(false);
+
     set_effects([]);
     set_bigid("jeko1");
   };
