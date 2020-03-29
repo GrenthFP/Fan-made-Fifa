@@ -222,7 +222,7 @@ function App() {
       ...small_players,
       { key: Math.random(), playerData: player_pool_small[newCharIndex] }
     ]);
-
+    set_toggle(false);
     set_stat(true);
   };
 
@@ -234,7 +234,6 @@ function App() {
     if (toggle == true) {
       set_draft(true);
     }
-    set_toggle(false);
   };
 
   const change = i => {
