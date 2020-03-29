@@ -296,9 +296,12 @@ function App() {
       >
         <button onClick={close_func}>close</button>
         <img className="prop" id={bigid} src={player}></img>
-
-        <img className="prop" id="gif1" src={effects[1]}></img>
-        <img className="prop" id="gif2" src={effects[0]}></img>
+        {!!effects[1] && (
+          <img className="prop" id="gif1" src={effects[1]}></img>
+        )}
+        {!!effects[0] && (
+          <img className="prop" id="gif2" src={effects[0]}></img>
+        )}
       </ReactModal>
 
       <ReactModal
