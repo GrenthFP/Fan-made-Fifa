@@ -19,7 +19,10 @@ const player_pool = [
   "AivanCARD.png",
   "Ivan_Stefanov.png",
   "Pesho_Yadkov.png",
-  "pesho2.png"
+  "pesho2.png",
+  "masis.png",
+  "brat.png",
+  "THEMitko.png"
 ];
 const player_pool_small = [
   {
@@ -118,6 +121,24 @@ const player_pool_small = [
     playerName: "Pesho2",
     image: "pesho2_small.png",
     imagePool: "pesho2_player.png"
+  },
+  {
+    big: "masis.png",
+    playerName: "Sisko Borisko",
+    image: "masis_s.png",
+    imagePool: "masis_player.png"
+  },
+  {
+    big: "brat.png",
+    playerName: "Nasko",
+    image: "brat_small.png",
+    imagePool: "brata_player.png"
+  },
+  {
+    big: "THEMitko.png",
+    playerName: "The Mitko",
+    image: "THEMitko_s.png",
+    imagePool: "the_mitko_player.png"
   }
 ];
 
@@ -162,7 +183,7 @@ function App() {
   const handleAfterOpenFunc = () => {
     let effectsCopy = [...effectsArr];
     set_effects(effectsCopy);
-    let chance = Math.floor(Math.random() * 110);
+    let chance = Math.floor(Math.random() * 135);
 
     let newCharIndex = 0;
     console.log(chance);
@@ -213,6 +234,15 @@ function App() {
       //silver rare
     } else if (chance > 70 && chance <= 77) {
       newCharIndex = 15;
+      //gold
+    } else if (chance > 109 && chance <= 119) {
+      newCharIndex = 16;
+      //silver rare
+    } else if (chance > 119 && chance <= 126) {
+      newCharIndex = 17;
+      //gold
+    } else if (chance > 126 && chance <= 134) {
+      newCharIndex = 18;
       //gold
     }
 
